@@ -1,5 +1,9 @@
 package src.main.java;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import java.util.Stack;
+
 
 public class ParenSymmetry {
 
@@ -11,10 +15,13 @@ public class ParenSymmetry {
                 stack.push(character);
             } else if (character == ')' && !stack.isEmpty() && stack.peek() == '(') {
                 stack.pop();        //if character is ) and the stack is not empty and when you
-            }else{                  // look at the top of stack and it equals to (, then take out ( from stack
+            }else{
+                // look at the top of stack and it equals to (, then take out ( from stack
+                System.out.println("Not Balanced");
                 return false;
             }
         }
+        System.out.println("String Balanced");
         return true;
     }
 
@@ -26,6 +33,25 @@ public class ParenSymmetry {
             // print whether or not the line's parenthesis are balanced
 
         // CLOSE the file
+
+        File file = new File(filename);
+        try {
+            Scanner scanner = new Scanner(file);
+            while(scanner.hasNextLine()){
+                String readFile = scanner.nextLine();
+                boolean balance = isBalanced(readFile);
+                System.out.println(balance);
+            }
+            scanner.close();
+
+        }catch(FileNotFoundException e){
+            System.out.println("No file found");
+            e.printStackTrace();
+        }
+
+
+
+
     }
 
     public static void main(String[] args) {
