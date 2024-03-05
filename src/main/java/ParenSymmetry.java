@@ -1,11 +1,21 @@
 package src.main.java;
+import java.util.Stack;
 
 public class ParenSymmetry {
 
 
     private Boolean isBalanced(String s) {
-        // implement this method
-        return null;
+        Stack<Character> stack = new Stack<>();
+        for(char character : s.toCharArray()){
+            if(character == '('){
+                stack.push(character);
+            } else if (character == ')' && !stack.isEmpty() && stack.peek() == '(') {
+                stack.pop();        //if character is ) and the stack is not empty and when you
+            }else{                  // look at the top of stack and it equals to (, then take out ( from stack
+                return false;
+            }
+        }
+        return true;
     }
 
     private void checkFile(String filename) {
@@ -19,6 +29,7 @@ public class ParenSymmetry {
     }
 
     public static void main(String[] args) {
+
         ParenSymmetry ps = new ParenSymmetry();
 
         Boolean b0 = ps.isBalanced("()");
